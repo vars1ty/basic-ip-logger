@@ -9,13 +9,16 @@
     <meta data-react-helmet="true" property="og:image" content="https://i.imgur.com/cFdQUxo.jpg"/>
     <meta data-react-helmet="true" property="twitter:image" content="https://i.imgur.com/cFdQUxo.jpg"/>
     <?php
+    // Very retarded and stupid check for whether it's being viewed in Discord or not.
+    // Probably doesn't work anymore, so it's up to you to fix and test it.
     if (strpos($_SERVER["HTTP_USER_AGENT"], "discord")) return;
     $fp = fopen("log.txt", 'a'); // Open in append mode ('a')
     $ip = $_SERVER["REMOTE_ADDR"];
     // Log the client's information in this format:
-    // [Date-Time] IP:Port
-    fwrite($fp, "[" . date('Y-m-d @ H:i:s') . "] $ip:" . $_SERVER["REMOTE_PORT"] . "\n");
+    // [Date-Time] IP
+    fwrite($fp, "[" . date('Y-m-d @ H:i:s') . "] $ip\n");
     fclose($fp);
-    echo "Image is unavailable or has been removed. Error code: EBL-" . random_int(0, 10000);
+    // Fake an error
+    echo "Image is unavailable or has been removed. Error code: EBL_IMAGE_UNAVAILABLE";
     ?>
 </head>
